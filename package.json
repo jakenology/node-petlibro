@@ -1,9 +1,48 @@
 {
   "name": "petlibro-api",
   "version": "1.0.0",
+  "description": "A Node.js client for PetLibro smart feeders and water fountains.",
   "main": "index.js",
+  "types": "index.d.ts",
   "exports": {
     "require": "./index.js",
     "import": "./index.mjs"
-  }
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jakenology/node-petlibro.git"
+  },
+  "keywords": [
+    "petlibro",
+    "iot",
+    "smart-home",
+    "feeder",
+    "cat",
+    "dockstream",
+    "granary"
+  ],
+  "author": "Jay Peters",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/jakenology/node-petlibro/issues"
+  },
+  "homepage": "https://github.com/jakenology/node-petlibro#readme",
+  "dependencies": {
+    "axios": "^1.6.0",
+    "uuid": "^9.0.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "files": [
+    "index.js",
+    "index.mjs",
+    "index.d.ts",
+    "README.md",
+    "LICENSE"
+  ]
 }
