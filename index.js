@@ -170,7 +170,22 @@ class PetLibroAPI {
             vacuumMode: mode 
         });
     }
+  
+    static get VacuumMode() {
+        return {
+            AUTO: "0",
+            MANUAL: "1",
+            OFF: "2"
+        };
+    }
 
+    static get WaterMode() {
+        return {
+            CONSTANT: 0,
+            INTERMITTENT: 1,
+            RADAR: 2
+        };
+    }
     async setLight(sn, enable) {
         return this.client.post('/device/setting/updateLightSwitch', {
             deviceSn: sn,
