@@ -1,0 +1,9 @@
+{
+  "name": "petlibro-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "exports": {
+    "require": "./index.js",
+    "import": "./index.mjs"
+  }
+}
