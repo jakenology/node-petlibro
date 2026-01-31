@@ -12,6 +12,11 @@ const axios = require('axios');
 const crypto = require('crypto');
 const { v4: uuidv4 } = require('uuid');
 
+const TRANSLATIONS = {
+    '宠物智能设备': 'Smart pet devices',
+    '喂食器': 'feeder'
+}
+
 class PetLibroAPI {
     constructor(email, password, region = 'US', timezone = 'America/Chicago') {
         this.email = email;
@@ -61,6 +66,28 @@ class PetLibroAPI {
                 return Promise.reject(error);
             }
         );
+    }
+
+    /**
+     * Internal Helper: Normalizes Chinese fields to English
+     */
+    _normalize(device) {
+        if (!device || typeof device !== 'object') return device;
+
+        // 1. Shallow copy to protect original data
+        const normalized = { ...device };
+
+        // 2. Scan every key
+        Object.keys(normalized).forEach(key => {
+            const val = normalized[key];
+            
+            // Check if value is in our dictionary
+            if (typeof val === 'string' && TRANSLATIONS[val]) {
+                normalized[key] = TRANSLATIONS[val];
+            }
+        });
+
+        return normalized;
     }
 
     hashPassword(password) {
@@ -126,7 +153,11 @@ class PetLibroAPI {
 
     async getDevices() {
         const { data } = await this.client.post('/device/device/list', {});
-        return data.data;
+        // Scan array and normalize all objects
+        if (Array.isArray(data.data)) {
+            return data.data.map(device => this._normalize(device));
+        }
+        return [];
     }
 
     async getDeviceState(sn) {
